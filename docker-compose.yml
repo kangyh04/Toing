@@ -1,0 +1,29 @@
+services:
+  app:
+    build: 
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ConnectionStrings__DefaultConnection=Server=db;Database=mydatabase;User=myuser;Password=mypassword;
+    depends_on:
+      - db
+
+  db:
+    build: .
+    image: mysql:8.0.0
+    environment:
+      - MYSQL_DATABASE=mydatabase
+      - MYSQL_USER=myuser
+      - MYSQL_PASSWORD=mypassword
+      - MYSQL_ROOT_PASSWORD=rootpassword
+    volumes:
+      - ./mysql_data:/var/lib/mysql
+    ports:
+      - 3306:3306
+
+volumes:
+  mysql_data:
+
