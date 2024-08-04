@@ -1,5 +1,5 @@
-# Created by https://www.toptal.com/developers/gitignore/api/visualstudio,csharp,dotnetcore
-# Edit at https://www.toptal.com/developers/gitignore?templates=visualstudio,csharp,dotnetcore
+# Created by https://www.toptal.com/developers/gitignore/api/visualstudio,visualstudiocode,csharp,dotnetcore
+# Edit at https://www.toptal.com/developers/gitignore?templates=visualstudio,visualstudiocode,csharp,dotnetcore
 
 ### Csharp ###
 ## Ignore Visual Studio temporary files, build results, and
@@ -126,7 +126,7 @@ ipch/
 *.e2e
 
 # TFS 2012 Local Workspace
-/
+$tf/
 
 # Guidance Automation Toolkit
 *.gpState
@@ -235,7 +235,7 @@ _pkginfo.txt
 
 # Others
 ClientBin/
-~
+~$*
 *~
 *.dbmdl
 *.dbproj.schemaview
@@ -407,6 +407,19 @@ obj/
 # Common node modules locations
 /node_modules
 /wwwroot/node_modules
+
+### VisualStudioCode ###
+!.vscode/*.code-snippets
+
+# Local History for Visual Studio Code
+
+# Built Visual Studio Code Extensions
+*.vsix
+
+### VisualStudioCode Patch ###
+# Ignore all local history of files
+.history
+.ionide
 
 ### VisualStudio ###
 
@@ -589,4 +602,4 @@ obj/
 ### VisualStudio Patch ###
 # Additional files built by Visual Studio
 
-# End of https://www.toptal.com/developers/gitignore/api/visualstudio,csharp,dotnetcore
+# End of https://www.toptal.com/developers/gitignore/api/visualstudio,visualstudiocode,csharp,dotnetcore
