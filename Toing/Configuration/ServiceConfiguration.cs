@@ -1,4 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore.Storage.ValueConversion.Internal;
+﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 using Toing.Data;
 
@@ -12,7 +12,11 @@ namespace Toing.Configuration
 
             services.AddControllers();
 
-            services.AddDbContext<AddDbContext>();
+            services.AddDbContext<AppDbContext>(options =>
+            {
+                options.UseMySql(builder.Configuration.GetConnectionString("DefaultConnection"),
+                    new MySqlServerVersion(new Version(8, 0, 0)));
+            });
 
             services.AddEndpointsApiExplorer();
             services.AddSwaggerGen(c =>
