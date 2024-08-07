@@ -7,22 +7,23 @@ services:
       - "8080:8080"
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
-      - ConnectionStrings__DefaultConnection=Server=db;Database=mydatabase;User=myuser;Password=mypassword;
+      # - ConnectionStrings__DefaultConnection=Server=db;Database=mydatabase;User=myuser;Password=mypassword;
+      - ConnectionStrings__DefaultConnection=Server=localhost;port=3306;Database=mydatabase;Uid=myuser;Pwd=mypassword;
     depends_on:
-      - db
+      - mysql
 
-  db:
-    build: .
-    image: mysql:8.0.0
+  mysql:
+    image: mysql:8.0
     environment:
-      - MYSQL_DATABASE=mydatabase
-      - MYSQL_USER=myuser
-      - MYSQL_PASSWORD=mypassword
-      - MYSQL_ROOT_PASSWORD=rootpassword
-    volumes:
-      - ./mysql_data:/var/lib/mysql
+      MYSQL_DATABASE: mydatabase
+      MYSQL_USER: myuser
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_PASSWORD: mypassword
+      # MYSQL_DATA_DIR: /var/lib/mysql
+    # volumes:
+    #  - ./mysql_data:/var/lib/mysql
     ports:
       - 3306:3306
 
-volumes:
-  mysql_data:
+# volumes:
+#  mysql_data:

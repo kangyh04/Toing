@@ -27,9 +27,7 @@ RUN dotnet add Toing/Toing.csproj package Swashbuckle.AspNetCore
 #COPY ./migrations /docker-entrypoint-initdb.d/
 
 # 필요한 경우 추가 도구 설치
-# RUN apt-get update && apt-get install -y some-required-tool
-
-# WORKDIR /app/Toing
+RUN apt-get update && apt-get install -y default-mysql-client && rm -rf /var/lib/apt/lists/*
 
 # Build the project
 RUN dotnet build -c Release --no-restore

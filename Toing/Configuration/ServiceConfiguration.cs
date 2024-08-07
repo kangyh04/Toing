@@ -12,10 +12,14 @@ namespace Toing.Configuration
 
             services.AddControllers();
 
+            var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+            Console.WriteLine(connectionString);
+
             services.AddDbContext<AppDbContext>(options =>
             {
-                options.UseMySql(builder.Configuration.GetConnectionString("DefaultConnection"),
-                    new MySqlServerVersion(new Version(8, 0, 0)));
+                Console.WriteLine("Added Db Context");
+                var version = new MySqlServerVersion(new Version(8, 0, 0));
+                options.UseMySql(connectionString, version);
             });
 
             services.AddEndpointsApiExplorer();

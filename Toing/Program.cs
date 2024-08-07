@@ -8,23 +8,37 @@ ServiceConfiguration.ConfigureServices(builder);
 
 var app = builder.Build();
 
+MiddlewareConfiguration.MapGrpcService(app);
+MiddlewareConfiguration.CofigureMiddleware(app);
+
 using (var scope = app.Services.CreateScope())
 {
     var services = scope.ServiceProvider;
+    var logger = services.GetRequiredService<ILogger<Program>>();
     var context = services.GetRequiredService<AppDbContext>();
 
-    try
-    {
-        context.Database.Migrate();
-    }
-    catch (Exception ex)
-    {
-        var logger = services.GetRequiredService<ILogger<Program>>();
-        logger.LogError(ex, "An error occurred while migrating the database.");
-    }
+//     try
+//     {
+//         for (int i = 0; i < 10; ++i)
+//         {
+            try
+            {
+                logger.LogInformation("attempting");
+                context.Database.Migrate();
+                logger.LogInformation("connected");
+//                 break;
+            }
+            catch (Exception ex)
+            {
+                logger.LogError(ex, "An error occurred while migrating the database.");
+//                 Thread.Sleep(5000);
+            }
+//         }
+//     }
+//     catch (Exception ex)
+//     {
+//         logger.LogError(ex, "could not connect to the db");
+//     }
 }
-
-MiddlewareConfiguration.MapGrpcService(app);
-MiddlewareConfiguration.CofigureMiddleware(app);
 
 app.Run();

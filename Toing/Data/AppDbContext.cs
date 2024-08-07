@@ -10,10 +10,14 @@ namespace Toing.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            base.OnModelCreating(modelBuilder);
+            modelBuilder.Entity<User>().ToTable("users");
         }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
+            if (!optionsBuilder.IsConfigured)
+            {
+                Console.WriteLine("on configuring");
+            }
         }
     }
 }
